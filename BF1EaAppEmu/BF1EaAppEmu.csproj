@@ -1,0 +1,80 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <Platforms>x64</Platforms>
+        <PlatformTarget>x64</PlatformTarget>
+        <Nullable>disable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <StartupObject>BF1EaAppEmu.App</StartupObject>
+        <ApplicationIcon>Assets\Icons\Favicon.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+        <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+        <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+        <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+        <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+        <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        <DebugType>full</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        <DebugType>none</DebugType>
+        <DebugSymbols>false</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="Assets\Icons\Favicon.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+        <PackageReference Include="NLog" Version="5.3.4" />
+        <PackageReference Include="RestSharp" Version="112.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Assets\Files\Exec\EADesktop.exe" />
+        <EmbeddedResource Include="Assets\Files\Exec\OriginDebug.exe" />
+        <EmbeddedResource Include="Assets\Files\LSX\00.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\01.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\02.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\03.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\04.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\05.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\06.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\07.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\08.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\09.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\10.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\11.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\12.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\13.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\14.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\15.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\16.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\17.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\18.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\19.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\20.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\21.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\22.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\23.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\24.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\25.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\26.xml" />
+        <EmbeddedResource Include="Assets\Files\LSX\27.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Resource Include="Assets\Icons\Favicon.ico" />
+    </ItemGroup>
+
+</Project>

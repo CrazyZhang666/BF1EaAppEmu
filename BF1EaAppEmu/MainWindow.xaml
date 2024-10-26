@@ -1,0 +1,149 @@
+﻿<Window
+    x:Class="BF1EaAppEmu.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BF1EaAppEmu"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Window_Main"
+    Title="战地1免平台启动器 v1.0.0.0"
+    Width="600"
+    Height="600"
+    Background="#F1F1F1"
+    Closing="Window_Main_Closing"
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+    Loaded="Window_Main_Loaded"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <Style x:Key="TextBlockStyle_Title" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+        <Style x:Key="TextBoxStyle_Input" TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="5,0,5,5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        </Style>
+
+        <Style x:Key="ButtonStyle_Normal" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="0,0,5,5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Style="{StaticResource TextBlockStyle_Title}" Text="🏷️ 战地1主程序路径" />
+            <DockPanel>
+                <Button
+                    Margin="0,0,5,5"
+                    Padding="7"
+                    Command="{Binding SelectBf1FilePathCommand}"
+                    Content="🔎 选择"
+                    DockPanel.Dock="Right"
+                    FontWeight="Bold"
+                    Foreground="#006CBE" />
+                <TextBox
+                    VerticalContentAlignment="Center"
+                    Cursor="Arrow"
+                    HorizontalScrollBarVisibility="Hidden"
+                    IsReadOnly="True"
+                    Style="{StaticResource TextBoxStyle_Input}"
+                    Text="{Binding MainModel.AppPath}"
+                    TextWrapping="NoWrap"
+                    VerticalScrollBarVisibility="Disabled" />
+            </DockPanel>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <UniformGrid Rows="2">
+                <DockPanel>
+                    <TextBlock
+                        DockPanel.Dock="Top"
+                        Style="{StaticResource TextBlockStyle_Title}"
+                        Text="🏷️ Cookie - Remid" />
+                    <TextBox Style="{StaticResource TextBoxStyle_Input}" Text="{Binding MainModel.Remid}" />
+                </DockPanel>
+
+                <DockPanel>
+                    <TextBlock
+                        DockPanel.Dock="Top"
+                        Style="{StaticResource TextBlockStyle_Title}"
+                        Text="🏷️ Cookie - Sid" />
+                    <TextBox Style="{StaticResource TextBoxStyle_Input}" Text="{Binding MainModel.Sid}" />
+                </DockPanel>
+            </UniformGrid>
+
+            <DockPanel Grid.Column="1">
+                <TextBlock
+                    Margin="0,5,5,5"
+                    DockPanel.Dock="Top"
+                    Style="{StaticResource TextBlockStyle_Title}"
+                    Text="🏷️ 战地1启动参数" />
+                <TextBox
+                    Margin="0,0,5,5"
+                    AcceptsReturn="True"
+                    Style="{StaticResource TextBoxStyle_Input}"
+                    Text="{Binding MainModel.RunArgs}" />
+            </DockPanel>
+        </Grid>
+
+        <DockPanel Grid.Row="2">
+            <WrapPanel VerticalAlignment="Center" DockPanel.Dock="Left">
+                <TextBlock
+                    Margin="5,0,0,5"
+                    VerticalAlignment="Center"
+                    d:Text="PlayerName"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="{Binding MainModel.PlayerName}" />
+                <TextBlock
+                    Margin="5,0,0,5"
+                    VerticalAlignment="Center"
+                    d:Text="0123456789"
+                    FontSize="12"
+                    Opacity="0.7"
+                    Text="{Binding MainModel.PersonaId}" />
+            </WrapPanel>
+
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button
+                    Command="{Binding RunBf1GameCommand}"
+                    Content="▶ 启动战地1"
+                    FontWeight="Bold"
+                    Foreground="Green"
+                    Style="{StaticResource ButtonStyle_Normal}" />
+                <Button
+                    Command="{Binding CloseBf1GameCommand}"
+                    Content="❌ 结束战地1"
+                    FontWeight="Bold"
+                    Foreground="Red"
+                    Style="{StaticResource ButtonStyle_Normal}" />
+            </StackPanel>
+        </DockPanel>
+
+    </Grid>
+
+</Window>
