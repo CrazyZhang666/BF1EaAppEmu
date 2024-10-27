@@ -77,4 +77,12 @@
         <Resource Include="Assets\Icons\Favicon.ico" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EditorConfigFiles Remove="E:\Dev\BF1\GitHub\BF1EaAppEmu\BF1EaAppEmu\.editorconfig" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="E:\Dev\BF1\GitHub\BF1EaAppEmu\BF1EaAppEmu\.editorconfig" />
+    </ItemGroup>
+
 </Project>

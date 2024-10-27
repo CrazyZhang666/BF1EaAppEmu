@@ -4,6 +4,7 @@ using BF1EaAppEmu.Helper;
 using BF1EaAppEmu.Models;
 using BF1EaAppEmu.Utils;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace BF1EaAppEmu;
 
@@ -45,6 +46,20 @@ public partial class MainWindow : Window
             LoggerHelper.Info("正在启动服务进程...");
             ProcessHelper.OpenProcess(CoreUtil.File_Service_EADesktop, true);
             ProcessHelper.OpenProcess(CoreUtil.File_Service_OriginDebug, true);
+
+            LoggerHelper.Info("正在启动 Local HTTP 监听服务...");
+            LocalHttpServer.Run();
+        });
+
+        // 注册 RunBf1Game
+        WeakReferenceMessenger.Default.Register<string, string>(this, "RunBf1Game", async (s, e) =>
+        {
+            await RunBf1Game();
+        });
+        // 注册 CloseBf1Game
+        WeakReferenceMessenger.Default.Register<string, string>(this, "CloseBf1Game", async (s, e) =>
+        {
+            await CloseBf1Game();
         });
     }
 
@@ -55,6 +70,9 @@ public partial class MainWindow : Window
     {
         Task.Run(() =>
         {
+            LoggerHelper.Info("正在停止 Local HTTP 监听服务...");
+            LocalHttpServer.Stop();
+
             LoggerHelper.Info("正在停止 LSX 监听服务...");
             LSXTcpServer.Stop();
 
@@ -125,6 +143,12 @@ public partial class MainWindow : Window
     [RelayCommand]
     private async Task RunBf1Game()
     {
+        if (ProcessHelper.IsAppRun(CoreUtil.Name_BF1))
+        {
+            MsgBoxHelper.Warning("战地1已经启动了，请不要重复运行");
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(Globals.AppPath))
         {
             MsgBoxHelper.Warning("战地1启动路径不能为空");

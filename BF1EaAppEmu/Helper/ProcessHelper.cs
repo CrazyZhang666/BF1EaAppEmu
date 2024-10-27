@@ -3,6 +3,62 @@
 public static class ProcessHelper
 {
     /// <summary>
+    /// 判断进程是否运行
+    /// </summary>
+    public static bool IsAppRun(string appName)
+    {
+        if (string.IsNullOrWhiteSpace(appName))
+            return false;
+
+        if (appName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+            appName = appName[..^4];
+
+        return Process.GetProcessesByName(appName).Length > 0;
+    }
+
+    /// <summary>
+    /// 打开http链接
+    /// </summary>
+    public static void OpenLink(string url)
+    {
+        if (!url.StartsWith("http"))
+        {
+            LoggerHelper.Warn($"链接不是http格式 {url}");
+            return;
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch (Exception ex)
+        {
+            LoggerHelper.Error($"打开http链接异常 {url}", ex);
+        }
+    }
+
+    /// <summary>
+    /// 打开文件夹路径
+    /// </summary>
+    public static void OpenDirectory(string dirPath)
+    {
+        if (!Directory.Exists(dirPath))
+        {
+            LoggerHelper.Warn($"文件夹路径不存在 {dirPath}");
+            return;
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(dirPath) { UseShellExecute = true });
+        }
+        catch (Exception ex)
+        {
+            LoggerHelper.Error($"打开文件夹异常 {dirPath}", ex);
+        }
+    }
+
+    /// <summary>
     /// 打开指定进程（支持静默）
     /// </summary>
     public static void OpenProcess(string appPath, bool isSilent = false)

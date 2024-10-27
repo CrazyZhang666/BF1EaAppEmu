@@ -15,6 +15,12 @@ public static class CoreUtil
 
     public static string File_Service_EADesktop { get; private set; }
     public static string File_Service_OriginDebug { get; private set; }
+    
+    //////////////////////////////////
+
+    public const string Name_BF1 = "bf1";
+
+    //////////////////////////////////
 
     static CoreUtil()
     {
